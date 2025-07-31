@@ -6,6 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { motion } from 'framer-motion';
 import loginImg from '../assets/register.jpg'; // reuse image
+import { useNavigate } from 'react-router-dom';
+
 
 const schema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
@@ -13,6 +15,8 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
+    const navigate = useNavigate();
+
   const [loginSuccess, setLoginSuccess] = useState(false);
   const {
     register,
@@ -28,8 +32,12 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, data.email, data.password);
       console.log("✅ Login successful:", data.email);
       setLoginSuccess(true);
-      reset();
-      setTimeout(() => setLoginSuccess(false), 4000);
+reset();
+setTimeout(() => {
+  setLoginSuccess(false);
+  navigate("/home"); // ✅ Redirect after login
+}, 1500);
+
     } catch (error) {
       console.error("❌ Login error:", error.message);
       alert("Login failed: " + error.message);
