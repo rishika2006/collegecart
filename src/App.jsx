@@ -1,14 +1,16 @@
-// src/App.jsx
-import React from 'react';
-import Register from './pages/Register';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
-    <div className="p-10">
-  
-      <Register />
-    </div>
-    
+    <Router>
+      <Routes>
+ <Route path="/" element={<Login />} />         {/* Default route */}
+        <Route path="/login" element={<Login />} />    {/* Login route */}
+        <Route path="/register" element={<Register />} /> {/* Register route */}
+      </Routes>
+    </Router>
   );
 }
 
