@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
 
 const Home = () => {
   const [userName, setUserName] = useState('');
@@ -24,9 +23,12 @@ const Home = () => {
 
   return (
     <div>
+      
+      
+
       <Navbar userName={userName} />
       <div className="flex">
-        <Sidebar />
+        
         <main className="p-6">
           <h2 className="text-2xl font-bold text-purple-800">🏡 Home Dashboard</h2>
           <p className="mt-2">Welcome to your CollegeCart+ portal!</p>

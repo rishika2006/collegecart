@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 html, body, #root {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 .input {
   @apply w-full p-2 border border-gray-300 rounded mt-1;
