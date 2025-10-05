@@ -1,0 +1,193 @@
+/* Root container should take full height */
+.cc-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full viewport height */
+  width: 100%;
+  background: linear-gradient(to bottom right, #faf5ff, #ffffff);
+}
+
+/* Navbar */
+.cc-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #7b2cbf;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.cc-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cc-logo {
+  height: 40px;
+  width: auto;
+}
+
+.cc-brand {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.cc-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cc-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.cc-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cc-btn-signout {
+  background: white;
+  color: #7b2cbf;
+  font-weight: 600;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.cc-btn-signout:hover {
+  background: #f3e8ff;
+}
+
+/* Hero Section */
+.cc-hero {
+  flex: 1; /* fills remaining height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.cc-hero-inner {
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.cc-hero-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+.cc-hero-sub {
+  margin-top: 0.5rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #555;
+}
+
+/* Cards Grid */
+.cc-card-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.cc-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.cc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.cc-card-ico {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.cc-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.cc-card-desc {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Sections below hero */
+.cc-section {
+  padding: 3rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cc-section.alt {
+  background: #f9f9ff;
+}
+
+.cc-steps {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 2rem;
+}
+
+.cc-step {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.cc-step-badge {
+  background: #7b2cbf;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 auto 0.5rem;
+  border-radius: 50%;
+}
+
+.cc-testis {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 2rem;
+}
+
+.cc-testi {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.cc-footer {
+  background: #7b2cbf;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
