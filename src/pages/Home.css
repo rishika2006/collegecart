@@ -1,193 +1,79 @@
-/* Root container should take full height */
-.cc-root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* full viewport height */
-  width: 100%;
-  background: linear-gradient(to bottom right, #faf5ff, #ffffff);
-}
+/* ===== Top-level ===== */
+.cc-root { background:#fff; color:#222; }
 
-/* Navbar */
-.cc-navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #7b2cbf;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  flex-wrap: wrap;
+/* ===== NAVBAR (exact purple/white look, responsive) ===== */
+.cc-navbar{
+  background:#8a2be2; /* purple */
+  color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:10px 18px; flex-wrap:wrap; box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
-
-.cc-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.cc-left{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.cc-logo{width:30px; height:30px; object-fit:contain}
+.cc-brand{font-weight:800; font-size:18px; letter-spacing:.2px}
+.cc-links{display:flex; gap:14px; flex-wrap:wrap}
+.cc-links a{color:#fff; text-decoration:none; font-size:14px;}
+.cc-links a:hover{text-decoration:underline}
+.cc-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.cc-welcome{font-size:13px; opacity:.95}
+.cc-btn-signout{
+  background:#fff; color:#7d2dd6; font-weight:700;
+  border:none; border-radius:6px; padding:6px 10px; cursor:pointer;
 }
+.cc-btn-signout:hover{background:#f4eaff}
 
-.cc-logo {
-  height: 40px;
-  width: auto;
+/* ===== HERO (fills viewport) ===== */
+.cc-hero{
+  min-height: calc(100vh - 60px); /* fill screen minus navbar */
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,#f4eaff 0%, #ffffff 100%);
+  padding:28px 18px;
 }
+.cc-hero-inner{max-width:1100px; width:100%;}
+.cc-hero-title{font-size:28px; font-weight:800; margin:0 0 6px 0}
+.cc-hero-sub{color:#555; margin-bottom:18px}
 
-.cc-brand {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.cc-links {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.cc-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 0.95rem;
-}
-
-.cc-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.cc-btn-signout {
-  background: white;
-  color: #7b2cbf;
-  font-weight: 600;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-.cc-btn-signout:hover {
-  background: #f3e8ff;
-}
-
-/* Hero Section */
-.cc-hero {
-  flex: 1; /* fills remaining height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.cc-hero-inner {
-  text-align: center;
-  max-width: 1200px;
-  width: 100%;
-}
-
-.cc-hero-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 700;
-}
-
-.cc-hero-sub {
-  margin-top: 0.5rem;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #555;
-}
-
-/* Cards Grid */
-.cc-card-grid {
-  margin-top: 2rem;
-  display: grid;
+/* ===== Cards Grid ===== */
+.cc-card-grid{
+  display:grid; gap:18px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
+}
+.cc-card{
+  background:#fff; border-radius:14px; padding:18px; text-align:center;
+  box-shadow:0 6px 18px rgba(138,43,226,.20);
+  transition: transform .25s ease, box-shadow .25s ease;
+  cursor:pointer; outline:none;
+}
+.cc-card:hover{ transform: translateY(-6px) scale(1.02);
+  box-shadow:0 12px 28px rgba(138,43,226,.30); }
+.cc-card-ico{ font-size:38px; margin-bottom:8px }
+.cc-card-title{ color:#8a2be2; font-weight:800; margin-bottom:4px }
+.cc-card-desc{ color:#555; font-size:14px }
+
+/* ===== Sections below hero ===== */
+.cc-section{ padding:40px 18px; }
+.cc-section.alt{ background:#f7f5ff; }
+.cc-section h2{ font-size:22px; font-weight:800; margin-bottom:16px; color:#2a2a2a }
+
+.cc-steps{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.cc-step{ background:#fff; border-radius:12px; padding:16px; box-shadow:0 4px 14px rgba(138,43,226,.15) }
+.cc-step-badge{
+  width:32px; height:32px; border-radius:50%; background:#8a2be2; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:800; margin-bottom:8px;
 }
 
-.cc-card {
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+.cc-testis{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.cc-testi{ background:#fff; border-radius:12px; padding:16px; box-shadow:0 4px 14px rgba(138,43,226,.15) }
+.cc-testi blockquote{ color:#333; margin:0 0 10px 0; font-style:italic }
+cc-testi figcaption{ color:#666 }
+
+/* ===== Footer ===== */
+.cc-footer{
+  background:#8a2be2; color:#fff; text-align:center; padding:12px;
 }
 
-.cc-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.cc-card-ico {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
-}
-
-.cc-card-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.cc-card-desc {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* Sections below hero */
-.cc-section {
-  padding: 3rem 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.cc-section.alt {
-  background: #f9f9ff;
-}
-
-.cc-steps {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin-top: 2rem;
-}
-
-.cc-step {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.cc-step-badge {
-  background: #7b2cbf;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
-  margin: 0 auto 0.5rem;
-  border-radius: 50%;
-}
-
-.cc-testis {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin-top: 2rem;
-}
-
-.cc-testi {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.cc-footer {
-  background: #7b2cbf;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: auto;
-  font-size: 0.9rem;
+/* ===== Mobile tweaks ===== */
+@media (max-width: 640px){
+  .cc-hero-title{ font-size:24px }
+  .cc-links{ width:100%; justify-content:center }
 }
