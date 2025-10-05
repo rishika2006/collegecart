@@ -6,7 +6,8 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import StudyMaterial from './pages/StudyMaterial';
 import ProtectedRoute from './components/ProtectedRoute';
-
+import LostFound from "./pages/LostFound.jsx";
+import MentalWellness from "./pages/MentalWellness";
 
 const App = () => {
   return (
@@ -14,7 +15,9 @@ const App = () => {
       {/* Public Routes */}
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
+      <Route path="/lost-found" element={<LostFound />} />
+       <Route path="/wellness" element={<MentalWellness />} />
+      
       {/* Protected Routes with Sidebar */}
       <Route
         path="/home"
