@@ -33,7 +33,7 @@ export default function Home() {
         // graceful fallback if backend not running
         setCards([
           { title: "Marketplace", icon: "🛍️", desc: "Buy & sell on campus", link: "/marketplace" },
-          { title: "Study Materials", icon: "📚", desc: "Notes, books, papers", link: "/study-materials" },
+          { title: "Study Materials", icon: "📚", desc: "Notes, books, papers", link: "/study-material" },
           { title: "Skill Exchange", icon: "🤝", desc: "Teach & learn skills", link: "/skill-exchange" },
           { title: "Lost & Found", icon: "🔎", desc: "Report or find items", link: "/lost-found" },
           { title: "Events", icon: "🎉", desc: "What’s happening", link: "/events" },

@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import StudyMaterial from './pages/StudyMaterial';
 import ProtectedRoute from './components/ProtectedRoute';
 import LostFound from "./pages/LostFound.jsx";
-import MentalWellness from "./pages/MentalWellness";
+//import MentalWellness from "./pages/MentalWellness";
 
 const App = () => {
   return (
@@ -15,9 +15,7 @@ const App = () => {
       {/* Public Routes */}
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/lost-found" element={<LostFound />} />
-       <Route path="/wellness" element={<MentalWellness />} />
-      
+     
       {/* Protected Routes with Sidebar */}
       <Route
         path="/home"
@@ -26,6 +24,17 @@ const App = () => {
             <div className="flex">
              
               <Home />
+            </div>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/lost-found"
+        element={
+          <ProtectedRoute>
+            <div className="flex">
+             
+              <LostFound />
             </div>
           </ProtectedRoute>
         }
@@ -43,7 +52,10 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+
+      
     </Routes>
+    
   );
 };
 
