@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
+import Navbar from "../components/Navbar";
+
 import "./Home.css";
 
 export default function Home() {
@@ -59,32 +61,9 @@ export default function Home() {
 
   return (
     <div className="cc-root">
-      {/* === EXACT NAVBAR THEME (purple + white, responsive) === */}
-      <header className="cc-navbar">
-        <div className="cc-left">
-          <img src="/logo.png" alt="Logo" className="cc-logo" />
-          <span className="cc-brand">CollegeCart+</span>
-          <nav className="cc-links">
-            <a href="/marketplace">Marketplace</a>
-            <a href="/study-materials">Study Materials</a>
-            <a href="/skill-exchange">Skill Exchange</a>
-            <a href="/lost-found">Lost &amp; Found</a>
-            <a href="/events">Events</a>
-            <a href="/wellness">Wellness</a>
-          </nav>
-        </div>
+      <Navbar user={user} />
 
-        <div className="cc-right">
-          <span className="cc-welcome">
-            Welcome, {user?.displayName || user?.email || "Guest"}!
-          </span>
-          {user && (
-            <button className="cc-btn-signout" onClick={handleSignOut}>
-              Sign Out
-            </button>
-          )}
-        </div>
-      </header>
+      
 
       {/* === HERO (fills the screen height, centered content) === */}
       <section className="cc-hero">

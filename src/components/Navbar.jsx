@@ -1,23 +1,23 @@
 // src/components/Navbar.jsx
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
-import { useAuth } from '../context/AuthContext';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { useAuth } from "../context/AuthContext"; // adjust path if yours differs
+import { Menu, X } from "lucide-react";
 
-const Navbar = () => {
-  const { currentUser } = useAuth();
+export default function Navbar() {
+  const { user } = useAuth(); // expects your AuthContext to return { user }
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate('/', { replace: true }); // ✅ go to login
-      window.location.reload(); // ✅ refresh in case state is stale
-    } catch (error) {
-      console.error("Logout failed:", error);
+      // redirect to login page (adjust path if needed)
+      window.location.href = "/";
+    } catch (err) {
+      console.error("Logout failed:", err);
+      alert("Logout failed, check console.");
     }
   };
 
@@ -27,57 +27,96 @@ const Navbar = () => {
     { name: "Skill Exchange", path: "/skill-exchange" },
     { name: "Lost & Found", path: "/lost-found" },
     { name: "Events", path: "/events" },
-    { name: "Wellness", path: "/wellness" }
+    { name: "Wellness", path: "/wellness" },
   ];
 
   return (
-    <header className="w-full bg-purple-600 text-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center text-sm">
-        <div className="flex items-center gap-3">
-          <h1 className="text-base font-semibold">🎓 CollegeCart+</h1>
-          <button className="sm:hidden" onClick={() => setOpen(!open)}>
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-
-        <div className="hidden sm:flex gap-4">
-          {links.map(({ name, path }) => (
-            <Link key={name} to={path} className="hover:underline transition duration-200">
-              {name}
+    <header className="bg-purple-700 text-white shadow sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* left: logo */}
+          <div className="flex items-center gap-3">
+            {/* update logo path if you have one; if no logo, this img can be removed */}
+            <img
+              src="/logo.png"
+              alt="CollegeCart+"
+              className="w-10 h-10 object-contain rounded-full border border-white/30"
+              onError={(e) => { e.currentTarget.style.display = "none"; }} 
+            />
+            <Link to="/" className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight">
+              <span className="text-white/95">CollegeCart</span>
+              <span className="ml-1 text-white">+</span>
             </Link>
-          ))}
-        </div>
+          </div>
 
-        <div className="flex items-center gap-3">
-          <span className="hidden sm:inline">Hi, {currentUser?.email || "Student"}</span>
-          <button
-            onClick={handleLogout}
-            className="bg-white text-purple-600 text-xs font-medium px-2 py-1 rounded hover:bg-purple-100 transition"
-          >
-            Sign Out
-          </button>
+          {/* center: links (desktop) */}
+          <nav className="hidden md:flex gap-6 flex-1 justify-center">
+            {links.map((l) => (
+              <Link
+                key={l.path}
+                to={l.path}
+                className="text-sm md:text-base hover:text-purple-200 transition"
+              >
+                {l.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* right: user & mobile button */}
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-3">
+              {user?.email && (
+                <div className="bg-white text-purple-700 px-3 py-1 rounded-full text-sm font-medium truncate max-w-[220px]">
+                  {user.email}
+                </div>
+              )}
+
+              <button
+                onClick={handleLogout}
+                className="bg-white text-purple-700 px-3 py-1.5 rounded-md font-semibold hover:bg-white/90 transition text-sm"
+              >
+                Sign Out
+              </button>
+            </div>
+
+            {/* mobile menu button */}
+            <button
+              className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-purple-600/80 focus:outline-none"
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-label="Toggle menu"
+            >
+              {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {open && (
-        <nav className="sm:hidden bg-purple-700 px-4 pb-3 text-sm">
-          <ul className="space-y-2">
-            {links.map(({ name, path }) => (
-              <li key={name}>
-                <Link
-                  to={path}
-                  onClick={() => setOpen(false)}
-                  className="block text-white hover:underline"
-                >
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+      {/* mobile panel */}
+      <div className={`md:hidden bg-purple-700/95 ${open ? "block" : "hidden"} px-4 pb-4`}>
+        <nav className="flex flex-col gap-2 py-2">
+          {links.map((l) => (
+            <Link
+              key={l.path}
+              to={l.path}
+              onClick={() => setOpen(false)}
+              className="block px-3 py-2 rounded text-white hover:bg-purple-600/80"
+            >
+              {l.name}
+            </Link>
+          ))}
+
+          <div className="mt-2 border-t border-white/10 pt-2">
+            {user?.email && <div className="text-sm text-white/90 mb-2">{user.email}</div>}
+            <button
+              onClick={() => { setOpen(false); handleLogout(); }}
+              className="w-full bg-white text-purple-700 px-3 py-2 rounded-md font-semibold"
+            >
+              Sign Out
+            </button>
+          </div>
         </nav>
-      )}
+      </div>
     </header>
   );
-};
-
-export default Navbar;
+}
