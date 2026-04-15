@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-
+import Navbar from "../components/Navbar";
 /**
  * Lost & Found — fully client-side, responsive, and interactive.
  *
@@ -181,7 +181,10 @@ function TextInput({ label, ...props }) {
 
 function Select({ label, options, ...props }) {
   return (
+    
+    
     <label className="block">
+
       <span className="text-sm font-medium text-neutral-700 dark:text-neutral-200">{label}</span>
       <select
         {...props}
@@ -308,14 +311,14 @@ export default function LostFoundPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex h-16 items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-2xl bg-blue-600 text-white grid place-items-center font-bold">LF</div>
+              <div className="h-9 w-9 rounded-2xl bg-purple-700 text-white grid place-items-center font-bold">LF</div>
               <div>
                 <h1 className="text-lg font-semibold leading-tight">Lost & Found</h1>
                 <p className="text-xs text-neutral-500">CollegeCart+</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={() => setPostOpen(true)} className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button onClick={() => setPostOpen(true)} className="inline-flex items-center gap-2 rounded-xl bg-purple-700 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <Icon name="plus" /> New post
               </button>
             </div>
@@ -598,7 +601,7 @@ function EmptyState({ onNew }) {
       </div>
       <h3 className="mt-3 text-lg font-semibold">No items found</h3>
       <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Try adjusting filters or create a new post.</p>
-      <button onClick={onNew} className="mt-4 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">Create a post</button>
+      <button onClick={onNew} className="mt-4 rounded-xl bg-purple-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-purple-800">Create a post</button>
     </div>
   );
 }

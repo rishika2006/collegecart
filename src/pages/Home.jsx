@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import Navbar from "../components/Navbar";
-
 import "./Home.css";
 
 export default function Home() {
@@ -20,7 +19,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Load dynamic content from MERN backend
+    // Load dynamic content from backend
     Promise.all([
       fetch(`${API}/api/sections`).then((r) => r.json()),
       fetch(`${API}/api/how-it-works`).then((r) => r.json()),
@@ -32,7 +31,7 @@ export default function Home() {
         setTestimonials(testi);
       })
       .catch(() => {
-        // graceful fallback if backend not running
+        // fallback content
         setCards([
           { title: "Marketplace", icon: "🛍️", desc: "Buy & sell on campus", link: "/marketplace" },
           { title: "Study Materials", icon: "📚", desc: "Notes, books, papers", link: "/study-material" },
@@ -54,6 +53,28 @@ export default function Home() {
       });
   }, [API]);
 
+  // === Scroll Animation Observer ===
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, idx) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            entry.target.style.transitionDelay = `${idx * 0.1}s`;
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const hiddenEls = document.querySelectorAll(".cc-card, .cc-step, .cc-testi");
+    hiddenEls.forEach((el) => observer.observe(el));
+
+    return () => {
+      hiddenEls.forEach((el) => observer.unobserve(el));
+    };
+  }, [cards, howItWorks, testimonials]);
+
   const handleSignOut = async () => {
     await signOut(auth);
     navigate("/login");
@@ -63,19 +84,17 @@ export default function Home() {
     <div className="cc-root">
       <Navbar user={user} />
 
-      
-
-      {/* === HERO (fills the screen height, centered content) === */}
+      {/* === HERO === */}
       <section className="cc-hero">
         <div className="cc-hero-inner">
-          <h1 className="cc-hero-title">🏠 Home Dashboard</h1>
+          <h1 className="cc-hero-title">Welcome! To Collegecart...</h1>
           <p className="cc-hero-sub">
-            Everything you need for campus life — at one place.
+            Everything you need for campus life — in one place.
           </p>
 
-          {/* BIG INTERACTIVE CARDS */}
-          <div className="cc-card-grid">
-            {cards.map((c, i) => (
+          {/* SIDE-BY-SIDE CARDS */}
+          <div className="cc-card-row">
+            {cards.slice(0, 4).map((c, i) => (
               <div
                 key={i}
                 className="cc-card"
@@ -93,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === SCROLLABLE CONTENT BELOW === */}
+      {/* === HOW IT WORKS === */}
       <section id="how" className="cc-section">
         <h2>How it works</h2>
         <div className="cc-steps">
@@ -107,6 +126,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* === TESTIMONIALS === */}
       <section id="testimonials" className="cc-section alt">
         <h2>What students say</h2>
         <div className="cc-testis">

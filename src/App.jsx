@@ -9,10 +9,15 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LostFound from './pages/LostFound.jsx';
 import Events from './pages/Events';
 import AddEvent from './pages/AddEvent';
-import EventDashboard from './pages/EventDashboard'; // ✅ new layout file (sidebar container)
+import EventDashboard from './pages/EventDashboard'; 
+import SkillExchangePage from "./pages/SkillExchange";
+import Marketplace from "./pages/Marketplace";
+import AddItem from "./components/AddItem";
+import ViewItem from "./components/ViewItem";
+// ✅ new layout file (sidebar container)
 
 // Optional: import Navbar if you want a global top bar
-// import Navbar from './components/Navbar';
+ //import Navbar from './components/Navbar';
 
 const App = () => {
   return (
@@ -46,14 +51,34 @@ const App = () => {
         />
 
         <Route
-          path="/study-material"
+          path="/materials"
           element={
             <ProtectedRoute>
               <StudyMaterial />
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/skill-exchange"
+  element={
+    <ProtectedRoute>
+      <SkillExchangePage />
+    </ProtectedRoute>
+  }
+/>
+        <Route
+  path="/marketplace"
+  element={
+    <ProtectedRoute>
+      <Marketplace />
+    </ProtectedRoute>
+  }
+>
+  <Route path="add" element={<AddItem />} />
+  <Route path="view" element={<ViewItem />} />
+</Route>
 
+       
         {/* ---------------- EVENTS SECTION ---------------- */}
         <Route
           path="/events"
@@ -72,6 +97,7 @@ const App = () => {
         {/* <Route path="/wellness" element={<ProtectedRoute><MentalWellness /></ProtectedRoute>} /> */}
 
       </Routes>
+
     </>
   );
 };

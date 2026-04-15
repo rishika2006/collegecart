@@ -23,11 +23,11 @@ export default function Navbar() {
 
   const links = [
     { name: "Marketplace", path: "/marketplace" },
-    { name: "Study Materials", path: "/study-material" },
+    { name: "Study Materials", path: "/materials" },
     { name: "Skill Exchange", path: "/skill-exchange" },
     { name: "Lost & Found", path: "/lost-found" },
     { name: "Events", path: "/events" },
-    { name: "Wellness", path: "/wellness" },
+    { name: "Planner", path: "/planner" },
   ];
 
   return (
